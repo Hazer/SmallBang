@@ -1,7 +1,8 @@
 package xyz.hanks.smallbang;
 
-import android.support.v7.app.AppCompatActivity;
+//import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -78,17 +79,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void like(View view){
+    boolean red = false;
+
+    public void like(final View view){
         mImage.setImageResource(R.drawable.heart_red);
         mSmallBang.bang(view);
         mSmallBang.setmListener(new SmallBangListener() {
             @Override
-            public void onAnimationStart() {
-            }
+            public void onAnimationStart() { }
 
             @Override
             public void onAnimationEnd() {
-                toast("heart+1");
+                view.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        red = !red;
+                        if (red) {
+                            mImage.setImageResource(R.drawable.heart_red);
+                        } else {
+                            mImage.setImageResource(R.drawable.heart);
+                        }
+                        mSmallBang.bang(view);
+                    }
+                }, 2);
+
             }
         });
     }

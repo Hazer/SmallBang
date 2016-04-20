@@ -172,7 +172,7 @@ public class SmallBang extends View {
     }
 
     private void bang() {
-        ValueAnimator valueAnimator = new ValueAnimator().ofFloat(0, 1).setDuration(ANIMATE_DURATION);
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1).setDuration(ANIMATE_DURATION*2);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -189,7 +189,7 @@ public class SmallBang extends View {
                 }
             }
         });
-        initDots();
+//        initDots();
     }
 
     private void initDots() {
@@ -236,22 +236,22 @@ public class SmallBang extends View {
                 float r = MAX_CIRCLE_RADIUS + progress3 * (MAX_RADIUS - MAX_CIRCLE_RADIUS);
 
 
-                for (int i = 0; i < dotList.size(); i += 2) {
-                    Dot dot = dotList.get(i);
-                    circlePaint.setColor(evaluateColor(dot.startColor, dot.endColor, progress3));
-
-                    float x = (float) (r * Math.cos(i * 2 * Math.PI / DOT_NUMBER)) + centerX;
-                    float y = (float) (r * Math.sin(i * 2 * Math.PI / DOT_NUMBER)) + centerY;
-                    canvas.drawCircle(x, y, DOT_BIG_RADIUS * (1 - progress3), circlePaint);
-
-                    Dot dot2 = dotList.get(i + 1);
-
-                    circlePaint.setColor(evaluateColor(dot2.startColor, dot2.endColor, progress3));
-                    float x2 = (float) (r * Math.cos(i * 2 * Math.PI / DOT_NUMBER + 0.2)) + centerX;
-                    float y2 = (float) (r * Math.sin(i * 2 * Math.PI / DOT_NUMBER + 0.2)) + centerY;
-                    canvas.drawCircle(x2, y2, DOT_SMALL_RADIUS * (1 - progress3), circlePaint);
-
-                }
+//                for (int i = 0; i < dotList.size(); i += 2) {
+//                    Dot dot = dotList.get(i);
+//                    circlePaint.setColor(evaluateColor(dot.startColor, dot.endColor, progress3));
+//
+//                    float x = (float) (r * Math.cos(i * 2 * Math.PI / DOT_NUMBER)) + centerX;
+//                    float y = (float) (r * Math.sin(i * 2 * Math.PI / DOT_NUMBER)) + centerY;
+//                    canvas.drawCircle(x, y, DOT_BIG_RADIUS * (1 - progress3), circlePaint);
+//
+//                    Dot dot2 = dotList.get(i + 1);
+//
+//                    circlePaint.setColor(evaluateColor(dot2.startColor, dot2.endColor, progress3));
+//                    float x2 = (float) (r * Math.cos(i * 2 * Math.PI / DOT_NUMBER + 0.2)) + centerX;
+//                    float y2 = (float) (r * Math.sin(i * 2 * Math.PI / DOT_NUMBER + 0.2)) + centerY;
+//                    canvas.drawCircle(x2, y2, DOT_SMALL_RADIUS * (1 - progress3), circlePaint);
+//
+//                }
             }
         }
     }
