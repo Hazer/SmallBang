@@ -29,7 +29,7 @@ import java.util.Random;
 public class SmallBang extends View {
 
     int[] colors = {0xFFDF4288, 0xFFCD8BF8, 0XFF2B9DF2, 0XFFA4EEB4, 0XFFE097CA, 0XFFCAACC6, 0XFFC5A5FC, 0XFFF5BC16, 0XFFF2DFC8, 0XFFE1BE8E, 0XFFC8C79D};
-    List<Dot> dotList = new ArrayList<>();
+//    List<Dot> dotList = new ArrayList<>();
     private long ANIMATE_DURATION = 1000;
     private float MAX_RADIUS = 150;
     private float MAX_CIRCLE_RADIUS = 100;
@@ -46,6 +46,8 @@ public class SmallBang extends View {
     private SmallBangListener mListener;
     private int centerY;
     private int centerX;
+
+    public boolean running = false;
 
     // 将下面的view变小
     // 画圆半径从小到大,同时颜色渐变 (P1)
@@ -105,19 +107,23 @@ public class SmallBang extends View {
         this.colors = Arrays.copyOf(newColors, newColors.length);
     }
 
-    /**
-     * set small dot number
-     * @param dotNumber
-     */
-    public void setDotNumber(int dotNumber){
-        DOT_NUMBER = dotNumber;
-    }
+//    /**
+//     * set small dot number
+//     * @param dotNumber
+//     */
+//    public void setDotNumber(int dotNumber){
+//        DOT_NUMBER = dotNumber;
+//    }
 
     public void bang(final View view, SmallBangListener listener) {
         bang(view, -1, listener);
     }
 
     public void bang(final View view, float radius, SmallBangListener listener) {
+
+        if (running) return;
+
+        running = true;
 
         // set listener
         if (listener != null) {
@@ -184,6 +190,7 @@ public class SmallBang extends View {
         valueAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
+                running = false;
                 if (mListener != null) {
                     mListener.onAnimationEnd();
                 }
@@ -192,21 +199,19 @@ public class SmallBang extends View {
 //        initDots();
     }
 
-    private void initDots() {
+//    private void initDots() {
 
-        Random random = new Random(System.currentTimeMillis());
-        for (int i = 0; i < DOT_NUMBER * 2; i++) {
-            Dot dot = new Dot();
-            dot.startColor = colors[random.nextInt(99999) % colors.length];
-            dot.endColor = colors[random.nextInt(99999) % colors.length];
-            dotList.add(dot);
-        }
-    }
+//        Random random = new Random(System.currentTimeMillis());
+//        for (int i = 0; i < DOT_NUMBER * 2; i++) {
+//            Dot dot = new Dot();
+//            dot.startColor = colors[random.nextInt(99999) % colors.length];
+//            dot.endColor = colors[random.nextInt(99999) % colors.length];
+//            dotList.add(dot);
+//        }
+//    }
 
     @Override
     protected void onDraw(Canvas canvas) {
-
-
 
         if (progress >= 0 && progress <= P1) {
             float progress1 = 1f / P1 * progress;
@@ -277,9 +282,9 @@ public class SmallBang extends View {
 
         return ((startA + (int) (fraction * (endA - startA))) << 24) | ((startR + (int) (fraction * (endR - startR))) << 16) | ((startG + (int) (fraction * (endG - startG))) << 8) | ((startB + (int) (fraction * (endB - startB))));
     }
-
-    class Dot {
-        int startColor;
-        int endColor;
-    }
+//
+//    class Dot {
+//        int startColor;
+//        int endColor;
+//    }
 }
