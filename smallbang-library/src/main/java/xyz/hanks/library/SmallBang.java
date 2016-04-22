@@ -83,6 +83,14 @@ public class SmallBang extends View {
         return smallBang;
     }
 
+    public static SmallBang attach2View(Context context, ViewGroup view) {
+//        ViewGroup rootView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
+        SmallBang smallBang = new SmallBang(context);
+        view.addView(smallBang, new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        return smallBang;
+    }
+
     private void init(AttributeSet attrs, int defStyleAttr) {
         circlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         circlePaint.setStyle(Paint.Style.FILL);
